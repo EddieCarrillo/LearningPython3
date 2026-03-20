@@ -16,6 +16,29 @@ class NumArray:
         
     def sumRange(self, left: int, right: int) -> int:
         return self.full_sum - self.l_range[left] - self.r_range[self.n - right - 1]
+
+## Pure Prefix Sum Solution
+
+### Increase the buffer one extra to represent A_-1, and P_-1,
+### where A = the input array, A_i = element of input array A at index i,
+### and P = prefix sums up to and including index i, for array A
+
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.pre_sum = [0]
+        total_sum = 0
+        for num in nums:
+            total_sum += num
+            self.pre_sum.append(total_sum)
+    def sumRange(self, left: int, right: int) -> int:
+        return self.pre_sum[right+1] - self.pre_sum[left] 
+        
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(left,right)
         
 
 
