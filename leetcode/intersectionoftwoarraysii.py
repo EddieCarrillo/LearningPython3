@@ -42,3 +42,19 @@ print(sol.intersect(i1[0], i1[1]))
 
 i2 = [[4,9,5], [9,4,9,8,4]]
 print(sol.intersect(i2[0], i2[1]))
+
+class Solution1:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        num_cnt = {}
+        intersect = []
+        for num in nums1:
+            if num not in num_cnt:
+                num_cnt[num] = 0
+            num_cnt[num] += 1
+        for num in nums2:
+            if num not in num_cnt:
+                num_cnt[num] = 0
+            if num_cnt[num] > 0:
+                intersect.append(num)
+                num_cnt[num] -= 1
+        return intersect
