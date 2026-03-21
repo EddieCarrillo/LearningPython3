@@ -58,3 +58,28 @@ class Solution1:
                 intersect.append(num)
                 num_cnt[num] -= 1
         return intersect
+
+#This is for the follow up question
+#where we assume sorted inputs
+#but, we'll just sort within the function
+#instead of providing sorted inputs
+#so it works with the leetcode judge
+class Solution2:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        m = len(nums1)
+        n = len(nums2)
+        nums1.sort()
+        nums2.sort()
+        intersect = []
+        i = 0
+        j = 0
+        while i < m and j < n:
+            if nums1[i] == nums2[j]:
+                intersect.append(nums1[i])
+                i += 1
+                j += 1
+            elif nums1[i] < nums2[j]:
+                i += 1
+            else:
+                j += 1
+        return intersect
