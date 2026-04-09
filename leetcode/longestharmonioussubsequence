@@ -1,0 +1,36 @@
+class Solution:
+    def findLHS(self, nums: List[int]) -> int:
+        cnt = {}
+        lhs = 0
+        for num in nums:
+            if num not in cnt:
+                cnt[num] = 1
+            else:
+                cnt[num] += 1
+        #Now, we know how many unique elements there are
+        #For each unique value, you have two possibilities.
+        # +1, -1.
+        #So, let's say we find the value 1
+        #You have two choices of values, 0 or 2
+        #That is, you only have a harmonious subsequence if, it consists of
+        # 0's and 1's or 1's and 2's
+        #Okay, so, let's suppose we go through nums and we count two 1's and three 0's.
+        #This would mean there exists some sequence where you have two 1's and three 0's.
+        #This would mean there would be five elements in that subsequence (composed of 1's and 0's)
+        #So, for each value that exists, you check the frequency of the value to its left, and, sum it
+        #with the frequency of the current value, and see if it is the largest harmonious sequence
+        # You repeat the same process but for 1's and 2's, and, more generally for the current value and the one to the right of the current value (+1), and update the max accordingly
+        # But, since were iterating over a set
+        # that means we will traverse over all values
+        #so, let's say we see values 0, 1, and 2.
+        # if look to both the left and the right
+        # then, we will observe the (0,1) pair twice
+        # once for when we iterate on 0 (right-look)
+        # and again for 1 (left-look).
+        # so, we only need to look in one-direction
+        #we will choose right
+        for num in cnt.keys():
+           right = num + 1
+           if right in cnt:
+               lhs = max(lhs, cnt[right] + cnt[num])
+        return lhs
